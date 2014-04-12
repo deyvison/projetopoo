@@ -7,7 +7,7 @@ public class Produto {
 	private double preco;
 	private int quantidade;
 
-	//Fazer o m�todo equals
+	
 	public Produto(long codProduto) {
 		this.codProduto = codProduto;
 	}

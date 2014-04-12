@@ -183,15 +183,6 @@ public class FarmaciaTest {
 	
 	@Test
 	public void alterarNomeTest(){
-		Produto p1 = new Produto("Anador",1234,3.00);
-		farmacia.cadastraProduto(p1);
-		p1.setNome("Dorflex");
-		farmacia.atualizarProduto(p1);
-		assertEquals(p1, farmacia.getProduto(1234));
-	}
-	
-	@Test
-	public void alterarNomeTest2(){
 		Produto p1 = new Produto("Narix",9581,12.00);
 		farmacia.cadastraProduto(p1);
 		p1.setNome("Vick");
@@ -209,26 +200,20 @@ public class FarmaciaTest {
 		p1.setPreco(9.00);
 		farmacia.atualizarProduto(p1);
 		assertEquals(p1,farmacia.getProduto(7788));
+		
 	}
 	
 	@Test
-	public void alterarPrecoTest2(){
-		Produto p1 = new Produto("Vick",9318,8.30);
-		farmacia.cadastraProduto(p1);
-		p1.setPreco(9.00);
-		farmacia.atualizarProduto(p1);
-		assertEquals(p1,farmacia.getProduto(9318));
-		p1.setPreco(9.99);
-		farmacia.atualizarProduto(p1);
-		assertEquals(p1,farmacia.getProduto(9318));
-	}
-	
-	@Test
-	public void alterarProdutoTest(){
-		Produto p1 = new Produto("Kinker ovo",6677,12.00);
+	public void alterarTodoProdutoTest(){
+		Produto p1 = new Produto("Kinker ovo",6677,12.00,100);
 		farmacia.cadastraProduto(p1);
 		p1.setNome("Ovo surpresa");
+		farmacia.atualizarProduto(p1);
+		assertEquals(p1,farmacia.getProduto(6677));
 		p1.setPreco(19.99);
+		farmacia.atualizarProduto(p1);
+		assertEquals(p1,farmacia.getProduto(6677));
+		p1.setQuantidade(200);
 		farmacia.atualizarProduto(p1);
 		assertEquals(p1,farmacia.getProduto(6677));
 	}
@@ -345,11 +330,6 @@ public class FarmaciaTest {
 	@Test (expected = Exception.class)
 	public void venderProdutoInexistenteTest() {
 		farmacia.venderProduto(123, 2);
-	}
-	
-	@Test (expected = Exception.class)
-	public void verificarValorDoProdutoInexistenteTest(){
-		farmacia.verificarValorDoProduto(999);
 	}
 	
 	@Test (expected = Exception.class)
