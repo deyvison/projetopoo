@@ -187,7 +187,7 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p1);
 		p1.setNome("Dorflex");
 		farmacia.atualizarProduto(p1);
-		assertEquals(p1.getNome(), farmacia.getProduto(1234).getNome());
+		assertEquals(p1, farmacia.getProduto(1234));
 	}
 	
 	@Test
@@ -196,10 +196,10 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p1);
 		p1.setNome("Vick");
 		farmacia.atualizarProduto(p1);
-		assertEquals(p1.getNome(), farmacia.getProduto(9581).getNome());
+		assertEquals(p1, farmacia.getProduto(9581));
 		p1.setNome("Valda");
 		farmacia.atualizarProduto(p1);
-		assertEquals(p1.getNome(), farmacia.getProduto(9581).getNome());
+		assertEquals(p1, farmacia.getProduto(9581));
 	}
 	
 	@Test
@@ -208,7 +208,7 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p1);
 		p1.setPreco(9.00);
 		farmacia.atualizarProduto(p1);
-		assertEquals(new Double(p1.getPreco()),new Double(farmacia.getProduto(7788).getPreco()));
+		assertEquals(p1,farmacia.getProduto(7788));
 	}
 	
 	@Test
@@ -217,10 +217,10 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p1);
 		p1.setPreco(9.00);
 		farmacia.atualizarProduto(p1);
-		assertEquals(new Double(p1.getPreco()),new Double(farmacia.getProduto(9318).getPreco()));
+		assertEquals(p1,farmacia.getProduto(9318));
 		p1.setPreco(9.99);
 		farmacia.atualizarProduto(p1);
-		assertEquals(new Double(p1.getPreco()),new Double(farmacia.getProduto(9318).getPreco()));
+		assertEquals(p1,farmacia.getProduto(9318));
 	}
 	
 	@Test
@@ -244,16 +244,16 @@ public class FarmaciaTest {
 	
 	@Test
 	public void	pesquisaClienteTest(){
-		Cliente c = new Cliente("Tayn�","434.865.555-45");
+		Cliente c = new Cliente("Tayna","434.865.555-45");
 		farmacia.cadastrarCliente(c);
 		assertEquals(c, farmacia.pesquisarCliente("434.865.555-45"));
 	}
 	
 	@Test(expected = ClienteJaExistenteException.class)
 	public void cadastraClienteComMesmoIdTest(){
-		Cliente c = new Cliente("Tayn�","434.865.555-45");
+		Cliente c = new Cliente("Tayna","434.865.555-45");
 		farmacia.cadastrarCliente(c);
-		Cliente d = new Cliente("Tayn�","434.865.555-45");
+		Cliente d = new Cliente("Tayna","434.865.555-45");
 		farmacia.cadastrarCliente(d);
 	}
 	
@@ -292,6 +292,15 @@ public class FarmaciaTest {
 		farmacia.cadastrarCliente(c1);
 		Cliente e = farmacia.pesquisarCliente("132.145.067-10");
 		assertNull(e);
+	}
+	
+	@Test
+	public void alterarCliente(){
+		Cliente c = new Cliente("Deyvison","333.555.666-00");
+		farmacia.cadastrarCliente(c);
+		c.setNome("Deyvison Melo");
+		farmacia.atualizarCliente(c);
+		assertEquals(c, farmacia.getCliente("333.555.666-00"));
 	}
 	
 	@Test

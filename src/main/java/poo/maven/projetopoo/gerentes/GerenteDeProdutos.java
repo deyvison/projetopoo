@@ -137,6 +137,7 @@ public class GerenteDeProdutos {
 				p.setNome(p1.getNome());
 				p.setPreco(p1.getPreco());
 				p.setQuantidade(p1.getQuantidade());
+				break;
 			}
 		}
 	}

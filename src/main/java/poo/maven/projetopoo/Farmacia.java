@@ -81,6 +81,15 @@ public class Farmacia {
 		this.gerenteProduto.alterarQuantidade(codProduto, quantidade);
 		
 	}
+
+	public void atualizarCliente(Cliente c) {
+		this.gerenteCliente.atualizarCliente(c);
+		
+	}
+
+	public Cliente getCliente(String id) {
+		return this.gerenteCliente.getCliente(id);
+	}
 	
 	
 }

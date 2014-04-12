@@ -54,4 +54,22 @@ public class GerenteDeClientes {
 		this.clientes.remove(this.pesquisarCliente(id));
 		
 	}
+
+	public void atualizarCliente(Cliente c1) {
+		
+		for(Cliente c : this.clientes){
+			
+			if(c.getId().equals(c1.getId())){
+				c.setNome(c1.getNome());
+				c.setId(c1.getId());
+				break;
+			}
+		}
+		
+	}
+
+	public Cliente getCliente(String id) {
+		return this.pesquisarCliente(id);
+		
+	}
 }

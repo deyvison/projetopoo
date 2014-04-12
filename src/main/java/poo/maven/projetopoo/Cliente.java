@@ -21,4 +21,12 @@ public class Cliente{
 		return this.id;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 }
