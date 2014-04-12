@@ -177,6 +177,10 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p);
 		assertEquals(1, farmacia.buscarProdutosPeloPreco(2.30).size());
 	}
+	@Test(expected = ProdutoInexistenteException.class)
+	public void buscarProdutoPeloPrecoIgualAZeroTest(){
+		farmacia.buscarProdutosPeloPreco(0);
+	}
 	
 	@Test
 	public void buscarProdutosPeloPrecoTest2() {
