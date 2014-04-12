@@ -90,6 +90,10 @@ public class Farmacia {
 	public Cliente getCliente(String id) {
 		return this.gerenteCliente.getCliente(id);
 	}
+
+	public List<Cliente> pesquisarClientePeloNome(String nome) {
+		return this.gerenteCliente.pesquisarClientePeloNome(nome);
+	}
 	
 	
 }

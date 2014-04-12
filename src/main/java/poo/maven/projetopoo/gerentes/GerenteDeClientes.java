@@ -72,4 +72,18 @@ public class GerenteDeClientes {
 		return this.pesquisarCliente(id);
 		
 	}
+	
+	
+
+	public List<Cliente> pesquisarClientePeloNome(String nome) {
+		List<Cliente> retorno = new LinkedList<Cliente>();
+		
+		for(Cliente c : this.clientes){
+			if(c.getNome().equals(nome)){
+				retorno.add(c);
+			}
+		}
+		return retorno;
+		
+	}
 }

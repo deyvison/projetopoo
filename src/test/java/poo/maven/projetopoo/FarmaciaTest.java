@@ -37,21 +37,25 @@ public class FarmaciaTest {
 		Produto produto2 = new Produto("ccc", 321, 1.00, 2);
 		farmacia.cadastraProduto(produto1);
 		farmacia.cadastraProduto(produto2);
-		assertEquals(2, farmacia.listProdutos().size());
+		List<Produto> lista = farmacia.listProdutos(); 
+		assertEquals(2, lista.size());
+		assertEquals(produto1, lista.get(0));
+		assertEquals(produto2, lista.get(1));
 	}
 	
 	@Test
 	public void verificaSeUmProdutoFoiCadastrato() {
 		Produto produto1 = new Produto("ddd", 1234, 0.99);
 		farmacia.cadastraProduto(produto1);
-		assertEquals(produto1, farmacia.getProduto(1234));
+		Produto produto2 = farmacia.getProduto(1234);
+		assertEquals(produto1, produto2);
 	}
 	
 	@Test(expected = ProdutoJaExistenteException.class)
 	public void cadastrarUmProdutoQueJaExiste() {
 		Produto produto1 = new Produto("eee", 111, 2.00);
-		Produto produto2 = new Produto("eee", 111, 2.00);
 		farmacia.cadastraProduto(produto1);
+		Produto produto2 = new Produto("eee", 111, 2.00);
 		farmacia.cadastraProduto(produto2);
 	}
 	
@@ -60,7 +64,8 @@ public class FarmaciaTest {
 		Produto p = new Produto("abc", 555, 2.00, 5);
 		farmacia.cadastraProduto(p);
 		farmacia.removerProdutoPeloCodigo(555);
-		assertNull(farmacia.getProduto(555));
+		Produto p2 = farmacia.getProduto(555); 
+		assertNull(p2);
 	}
 	
 	@Test(expected = ProdutoInexistenteException.class)
@@ -102,7 +107,7 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p);
 	}
 	
-	@Test //Mexido
+	@Test
 	public void pesquisarProdutoPeloNomeTest() {
 		Produto p = new Produto("Dipirona", 1234, 5.00, 4);
 		farmacia.cadastraProduto(p);
@@ -114,7 +119,8 @@ public class FarmaciaTest {
 	public void pesquisarProdutoInexistentePeloNomeTest() {
 		Produto p = new Produto("Paracetamol", 654, 4.20);
 		farmacia.cadastraProduto(p);
-		assertNull(farmacia.pesquisarProdutoPeloNome("Dorflex"));
+		Produto p2 = farmacia.pesquisarProdutoPeloNome("Dorflex");
+		assertNull(p2);
 	}
 	
 	@Test
@@ -129,14 +135,16 @@ public class FarmaciaTest {
 	public void pesquisarProdutoInexistentePeloCodigoTest() {
 		Produto p = new Produto("Paracetamol", 654, 4.20, 400);
 		farmacia.cadastraProduto(p);
-		assertNull(farmacia.getProduto(998));
+		Produto p2 = farmacia.getProduto(998);
+		assertNull(p2);
 	}
 	
 	@Test
 	public void pesquisarProdutoInexistenteTest() {
 		Produto p = new Produto("Anador", 145, 3.00, 3);
 		farmacia.cadastraProduto(p);
-		assertNull(farmacia.getProduto(146));
+		Produto p2 = farmacia.getProduto(146); 
+		assertNull(p2);
 	}
 	
 	@Test
@@ -144,7 +152,8 @@ public class FarmaciaTest {
 		Produto p = new Produto("Dipirona", 123, 1.20);
 		farmacia.cadastraProduto(p);
 		farmacia.adicionarProdutoEmEstoque(123, 10);
-		assertEquals(10, farmacia.getProduto(123).getQuantidade());
+		Produto p2 = farmacia.getProduto(123);
+		assertEquals(10, p2.getQuantidade());
 	}
 	
 	@Test
@@ -152,7 +161,8 @@ public class FarmaciaTest {
 		Produto p = new Produto("Escova de dente - Oral-B", 5543, 5.00, 30);
 		farmacia.cadastraProduto(p);
 		farmacia.adicionarProdutoEmEstoque(5543, 50);
-		assertEquals(80, farmacia.getProduto(5543).getQuantidade());
+		Produto p2 = farmacia.getProduto(5543);
+		assertEquals(80, p2.getQuantidade());
 	}
 	
 	@Test(expected = QuantidadeInvalidaException.class)
@@ -178,7 +188,10 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p2);
 		farmacia.cadastraProduto(p3);
 		farmacia.cadastraProduto(p4);
-		assertEquals(2, farmacia.buscarProdutosPeloPreco(2.30).size());
+		List <Produto> lista = farmacia.buscarProdutosPeloPreco(2.30);
+		assertEquals(2, lista.size());
+		assertEquals(p1, lista.get(0));
+		assertEquals(p4, lista.get(1));
 	}
 	
 	@Test
@@ -190,7 +203,8 @@ public class FarmaciaTest {
 		assertEquals(p1, farmacia.getProduto(9581));
 		p1.setNome("Valda");
 		farmacia.atualizarProduto(p1);
-		assertEquals(p1, farmacia.getProduto(9581));
+		Produto p2 = farmacia.getProduto(9581);
+		assertEquals(p1, p2);
 	}
 	
 	@Test
@@ -199,7 +213,8 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p1);
 		p1.setPreco(9.00);
 		farmacia.atualizarProduto(p1);
-		assertEquals(p1,farmacia.getProduto(7788));
+		Produto p2 = farmacia.getProduto(7788);
+		assertEquals(p1,p2);
 		
 	}
 	
@@ -231,7 +246,23 @@ public class FarmaciaTest {
 	public void	pesquisaClienteTest(){
 		Cliente c = new Cliente("Tayna","434.865.555-45");
 		farmacia.cadastrarCliente(c);
-		assertEquals(c, farmacia.pesquisarCliente("434.865.555-45"));
+		Cliente c2 = farmacia.pesquisarCliente("434.865.555-45");
+		assertEquals(c, c2);
+	}
+	
+	@Test
+	public void pesquisarClientesPeloNome(){
+		Cliente c = new Cliente("Rodrigo","111.222.333-11");
+		farmacia.cadastrarCliente(c);
+		Cliente c1 = new Cliente("Rodrigo","222.333.444-22");
+		farmacia.cadastrarCliente(c1);
+		Cliente c2 = new Cliente("Rodrigo","333.444.555-33");
+		farmacia.cadastrarCliente(c2);
+		List<Cliente> lista = farmacia.pesquisarClientePeloNome("Rodrigo");
+		assertEquals(3, lista.size());
+		assertEquals(c,lista.get(0));
+		assertEquals(c1,lista.get(1));
+		assertEquals(c2,lista.get(2));
 	}
 	
 	@Test(expected = ClienteJaExistenteException.class)
@@ -285,7 +316,8 @@ public class FarmaciaTest {
 		farmacia.cadastrarCliente(c);
 		c.setNome("Deyvison Melo");
 		farmacia.atualizarCliente(c);
-		assertEquals(c, farmacia.getCliente("333.555.666-00"));
+		Cliente c2 = farmacia.getCliente("333.555.666-00");
+		assertEquals(c, c2);
 	}
 	
 	@Test
