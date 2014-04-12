@@ -265,6 +265,11 @@ public class FarmaciaTest {
 		assertEquals(c2,lista.get(2));
 	}
 	
+	@Test(expected = ClienteInexistenteException.class)
+	public void pesquisarClienteInexistentePeloNomeTest(){
+		farmacia.pesquisarClientePeloNome("fulano");
+	}
+	
 	@Test(expected = ClienteJaExistenteException.class)
 	public void cadastraClienteComMesmoIdTest(){
 		Cliente c = new Cliente("Tayna","434.865.555-45");

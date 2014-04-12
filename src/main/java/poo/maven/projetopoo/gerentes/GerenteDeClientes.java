@@ -82,8 +82,13 @@ public class GerenteDeClientes {
 			if(c.getNome().equals(nome)){
 				retorno.add(c);
 			}
+		}if(retorno.size()>0){
+			return retorno;
+		}else{
+			throw new ClienteInexistenteException("Cliente Inexitente");
 		}
-		return retorno;
+		
+		
 		
 	}
 }
