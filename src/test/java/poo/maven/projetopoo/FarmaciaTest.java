@@ -59,13 +59,13 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(produto2);
 	}
 	
-	@Test
+	@Test(expected = ProdutoInexistenteException.class)
 	public void verificaSeUmProdutoFoiRemovidoTest() {
 		Produto p = new Produto("abc", 555, 2.00, 5);
 		farmacia.cadastraProduto(p);
 		farmacia.removerProdutoPeloCodigo(555);
 		Produto p2 = farmacia.getProduto(555); 
-		assertNull(p2);
+//		assertNull(p2);
 	}
 	
 	@Test(expected = ProdutoInexistenteException.class)
@@ -131,20 +131,20 @@ public class FarmaciaTest {
 		assertEquals(p1, p2);
 	}
 	
-	@Test
+	@Test (expected = ProdutoInexistenteException.class)
 	public void pesquisarProdutoInexistentePeloCodigoTest() {
 		Produto p = new Produto("Paracetamol", 654, 4.20, 400);
 		farmacia.cadastraProduto(p);
 		Produto p2 = farmacia.getProduto(998);
-		assertNull(p2);
+		//assertNull(p2);
 	}
 	
-	@Test
+	@Test(expected = ProdutoInexistenteException.class)
 	public void pesquisarProdutoInexistenteTest() {
 		Produto p = new Produto("Anador", 145, 3.00, 3);
 		farmacia.cadastraProduto(p);
 		Produto p2 = farmacia.getProduto(146); 
-		assertNull(p2);
+//		assertNull(p2);
 	}
 	
 	@Test
@@ -337,21 +337,21 @@ public class FarmaciaTest {
 		assertEquals(3,p.getQuantidade());
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = QuantidadeInvalidaException.class)
 	public void venderProdutoQuantidadeMaiorTest(){
 		Produto p = new Produto("Anador", 444, 1.00, 10);
 		farmacia.cadastraProduto(p);
 		farmacia.venderProduto(444,11);
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = QuantidadeInvalidaException.class)
 	public void venderProdutoQuantidadeInvalidaTest() {
 		Produto p = new Produto("Nimesulida", 222, 3.00, 5);
 		farmacia.cadastraProduto(p);
 		farmacia.venderProduto(222,-1);
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = QuantidadeInvalidaException.class)
 	public void venderProdutoQuantidadeZeroTest() {
 		Produto p = new Produto("Doril", 101, 1.50, 3);
 		farmacia.cadastraProduto(p);
@@ -368,12 +368,12 @@ public class FarmaciaTest {
 		farmacia.vender(v);
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = ProdutoInexistenteException.class)
 	public void venderProdutoInexistenteTest() {
 		farmacia.venderProduto(123, 2);
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = QuantidadeInvalidaException.class)
 	public void alterarQuantidadeInvalidaTest(){
 		Produto p = new Produto("Dipirona", 111, 1.20, 50);
 		farmacia.cadastraProduto(p);
