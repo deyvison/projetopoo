@@ -291,7 +291,7 @@ public class FarmaciaTest {
 		assertEquals(0, lista.size());
 	}
 	
-	@Test(expected = Exception.class)
+	@Test(expected = ClienteInexistenteException.class)
 	public void removeClienteInexistenteTest(){
 		Cliente c = new Cliente("Vanessa","123.345.567-90");
 		farmacia.cadastrarCliente(c);
@@ -380,7 +380,7 @@ public class FarmaciaTest {
 		farmacia.alterarQuantidade(111,-1);
 	}
 	
-	@Test (expected = Exception.class)
+	@Test (expected = ProdutoInexistenteException.class)
 	public void alterarQuantidadeDeProdutoInexistenteTest(){
 		farmacia.alterarQuantidade(111,5);
 	}

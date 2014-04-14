@@ -49,7 +49,7 @@ public class GerenteDeClientes {
 	public void removerCliente(String id) {
 		
 		if(!this.isCadastrado(id)){
-			throw new RuntimeException("Cliente inexistente");
+			throw new ClienteInexistenteException("Cliente inexistente");
 		}
 		this.clientes.remove(this.pesquisarCliente(id));
 		
