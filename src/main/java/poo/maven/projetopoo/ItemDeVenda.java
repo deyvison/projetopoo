@@ -9,7 +9,13 @@ public class ItemDeVenda {
 		produto = p;
 		this.quantidade = quant;
 	}
-	
-	
+
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
 
 }

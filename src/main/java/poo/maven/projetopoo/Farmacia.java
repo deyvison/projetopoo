@@ -13,8 +13,7 @@ public class Farmacia {
 	private GerenteDeClientes gerenteCliente;
 	
 	private GerenteDeVendas gerenteVendas;
-	
-	
+		
 	public Farmacia() {
 		gerenteProduto = new GerenteDeProdutos();
 		gerenteCliente = new GerenteDeClientes();
@@ -65,22 +64,10 @@ public class Farmacia {
 		this.gerenteProduto.atualizarProduto(p1);	
 	}
 	
-	public void venderProduto(long codProduto, int quantidade) {
-		this.gerenteVendas.venderProduto(codProduto, quantidade);
-	}
-	
 	public void vender(Venda v){
 		this.gerenteVendas.vender(v);
 	}
 
-	public double verificarValorDoProduto(long codProduto) {
-		return this.gerenteProduto.verificarValorDoProduto(codProduto);
-	}
-
-	public void alterarQuantidade(long codProduto, int quantidade) {
-		this.gerenteProduto.alterarQuantidade(codProduto, quantidade);
-		
-	}
 
 	public void atualizarCliente(Cliente c) {
 		this.gerenteCliente.atualizarCliente(c);
@@ -93,6 +80,14 @@ public class Farmacia {
 
 	public List<Cliente> pesquisarClientePeloNome(String nome) {
 		return this.gerenteCliente.pesquisarClientePeloNome(nome);
+	}
+	
+	public void adicionarItemDeVenda(long codVenda, long codProduto, int quantidade) {
+		this.gerenteVendas.adcionarItemDeVenda(codVenda, codProduto, quantidade);
+	}
+
+	public void adicionarVenda(Venda v) {
+		this.gerenteVendas.adicionarVenda(v);
 	}
 	
 	

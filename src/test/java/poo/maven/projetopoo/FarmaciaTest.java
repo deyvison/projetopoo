@@ -223,6 +223,16 @@ public class FarmaciaTest {
 	}
 	
 	@Test
+	public void alterarQuantidadeTest(){
+		Produto p1 = new Produto("Dipirona",999,2.50,50);
+		farmacia.cadastraProduto(p1);
+		p1.setQuantidade(30);
+		farmacia.atualizarProduto(p1);
+		Produto p2 = farmacia.getProduto(999);
+		assertEquals(p1,p2);
+	}
+	
+	@Test
 	public void alterarTodoProdutoTest(){
 		Produto p1 = new Produto("Kinker ovo",6677,12.00,100);
 		farmacia.cadastraProduto(p1);
@@ -330,58 +340,66 @@ public class FarmaciaTest {
 	}
 	
 	@Test
-	public void venderProdutoTest(){
-		Produto p = new Produto("Dipirona", 123, 2.00, 5);
+	public void venderItemTest() {
+		Venda v = new Venda(111);
+		Produto p = new Produto("Doril",101,1.50,3);
 		farmacia.cadastraProduto(p);
-		farmacia.venderProduto(123,2);
-		assertEquals(3,p.getQuantidade());
-	}
-	
-	@Test (expected = QuantidadeInvalidaException.class)
-	public void venderProdutoQuantidadeMaiorTest(){
-		Produto p = new Produto("Anador", 444, 1.00, 10);
-		farmacia.cadastraProduto(p);
-		farmacia.venderProduto(444,11);
-	}
-	
-	@Test (expected = QuantidadeInvalidaException.class)
-	public void venderProdutoQuantidadeInvalidaTest() {
-		Produto p = new Produto("Nimesulida", 222, 3.00, 5);
-		farmacia.cadastraProduto(p);
-		farmacia.venderProduto(222,-1);
-	}
-	
-	@Test (expected = QuantidadeInvalidaException.class)
-	public void venderProdutoQuantidadeZeroTest() {
-		Produto p = new Produto("Doril", 101, 1.50, 3);
-		farmacia.cadastraProduto(p);
-		farmacia.venderProduto(101,0);
+		farmacia.adicionarVenda(v);
+		farmacia.adicionarItemDeVenda(111,101,2);
+		farmacia.vender(v);
+		assertEquals(1,farmacia.getProduto(101).getQuantidade());
 	}
 	
 	@Test
 	public void venderItensTest() {
-		Produto p = new Produto("Doril", 101, 1.50, 3);
-		farmacia.cadastraProduto(p);
-		ItemDeVenda i = new ItemDeVenda(p,2);
-		Venda v = new Venda();
-		v.adicionarItem(i);
+		Venda v = new Venda(111);
+		farmacia.adicionarVenda(v);
+		Produto p1 = new Produto("Doril",101,1.50,3);
+		Produto p2 = new Produto("Anador",222,2.00,10);
+		Produto p3 = new Produto("Valdas",543,1.75,15);
+		farmacia.cadastraProduto(p1);
+		farmacia.cadastraProduto(p2);
+		farmacia.cadastraProduto(p3);
+		farmacia.adicionarItemDeVenda(111,101,2);
+		farmacia.adicionarItemDeVenda(111,222,5);
+		farmacia.adicionarItemDeVenda(111,543,3);
 		farmacia.vender(v);
+		assertEquals(1,farmacia.getProduto(101).getQuantidade());
+		assertEquals(5,farmacia.getProduto(222).getQuantidade());
+		assertEquals(12,farmacia.getProduto(543).getQuantidade());
 	}
-	
-	@Test (expected = ProdutoInexistenteException.class)
-	public void venderProdutoInexistenteTest() {
-		farmacia.venderProduto(123, 2);
+
+	@Test (expected = QuantidadeInvalidaException.class)
+	public void adicionarItemQuantidadeMaiorTest(){
+		Venda v = new Venda(100);
+		Produto p = new Produto("Anador", 444, 1.00, 10);
+		farmacia.cadastraProduto(p);
+		farmacia.adicionarVenda(v);
+		farmacia.adicionarItemDeVenda(100,444,11);
 	}
 	
 	@Test (expected = QuantidadeInvalidaException.class)
-	public void alterarQuantidadeInvalidaTest(){
-		Produto p = new Produto("Dipirona", 111, 1.20, 50);
+	public void adicionarItemQuantidadeInvalidaTest() {
+		Venda v = new Venda(125);
+		Produto p = new Produto("Nimesulida", 222, 3.00, 5);
 		farmacia.cadastraProduto(p);
-		farmacia.alterarQuantidade(111,-1);
+		farmacia.adicionarVenda(v);
+		farmacia.adicionarItemDeVenda(125,222,-1);
+	}
+	
+	@Test (expected = QuantidadeInvalidaException.class)
+	public void adicionarItemQuantidadeZeroTest() {
+		Venda v = new Venda(555);
+		Produto p = new Produto("Doril", 101, 1.50, 3);
+		farmacia.cadastraProduto(p);
+		farmacia.adicionarVenda(v);
+		farmacia.adicionarItemDeVenda(555,101,0);
 	}
 	
 	@Test (expected = ProdutoInexistenteException.class)
-	public void alterarQuantidadeDeProdutoInexistenteTest(){
-		farmacia.alterarQuantidade(111,5);
+	public void adicionarItemInexistenteTest() {
+		Venda v = new Venda(111);
+		farmacia.adicionarVenda(v);
+		farmacia.adicionarItemDeVenda(111,101,1);
 	}
 }

@@ -141,27 +141,5 @@ public class GerenteDeProdutos {
 		}
 	}
 
-	public double verificarValorDoProduto(long codProduto) {
-		Produto p = this.getProduto(codProduto);
-		double preco = 0.0;
-		if (p != null){
-			return p.getPreco();
-		}
-		throw new ProdutoInexistenteException("Produto inexistente");
-	}
 
-	public void alterarQuantidade(long codProduto, int quantidade) {
-		Produto p = this.getProduto(codProduto);
-		if (p!= null){
-			if (quantidade >= 0){
-				p.setQuantidade(quantidade);
-			}
-			else {
-				throw new QuantidadeInvalidaException("Quantidade Invalida");
-			}
-		}
-		else {
-			throw new ProdutoInexistenteException("Produto inexistente!");
-		}
-	}
 }
