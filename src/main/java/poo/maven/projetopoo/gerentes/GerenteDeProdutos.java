@@ -153,7 +153,7 @@ public class GerenteDeProdutos {
 
 	public void alterarQuantidade(long codProduto, int quantidade) {
 		Produto p = this.getProduto(codProduto);
-		if (p!= null && quantidade >= 0){
+		if (p!= null){
 			if (quantidade >= 0){
 				p.setQuantidade(quantidade);
 			}
