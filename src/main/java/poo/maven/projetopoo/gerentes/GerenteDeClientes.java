@@ -39,7 +39,7 @@ public class GerenteDeClientes {
 				return c; 
 			}
 		}
-		return null;
+		throw new ClienteInexistenteException("Cliente não cadastrado");
 	}
 
 	public List<Cliente> listClientes() {

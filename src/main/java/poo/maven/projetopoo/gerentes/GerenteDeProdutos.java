@@ -48,8 +48,7 @@ public class GerenteDeProdutos {
 
 	private void validarPreco(double preco) {
 		if (preco <= 0) {
-			throw new PrecoInvalidoException(
-					"Cadastre um pre�o maior que R$ 0,00");
+			throw new PrecoInvalidoException("Cadastre um pre�o maior que R$ 0,00");
 		}
 	}
 
@@ -94,7 +93,7 @@ public class GerenteDeProdutos {
 				return p;
 			}
 		}
-		return null;
+		throw new ProdutoInexistenteException("produto não encontrado");
 	}
 
 	public void adicionarProdutoEmEstoque(int codProduto, int quantidade) {

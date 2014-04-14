@@ -65,7 +65,7 @@ public class FarmaciaTest {
 		farmacia.cadastraProduto(p);
 		farmacia.removerProdutoPeloCodigo(555);
 		Produto p2 = farmacia.getProduto(555); 
-//		assertNull(p2);
+
 	}
 	
 	@Test(expected = ProdutoInexistenteException.class)
@@ -115,12 +115,12 @@ public class FarmaciaTest {
 		assertEquals(p, produtoPeloNome);
 	}
 	
-	@Test
+	@Test(expected = ProdutoInexistenteException.class)
 	public void pesquisarProdutoInexistentePeloNomeTest() {
 		Produto p = new Produto("Paracetamol", 654, 4.20);
 		farmacia.cadastraProduto(p);
 		Produto p2 = farmacia.pesquisarProdutoPeloNome("Dorflex");
-		assertNull(p2);
+		
 	}
 	
 	@Test
@@ -136,7 +136,7 @@ public class FarmaciaTest {
 		Produto p = new Produto("Paracetamol", 654, 4.20, 400);
 		farmacia.cadastraProduto(p);
 		Produto p2 = farmacia.getProduto(998);
-		//assertNull(p2);
+
 	}
 	
 	@Test(expected = ProdutoInexistenteException.class)
@@ -144,7 +144,7 @@ public class FarmaciaTest {
 		Produto p = new Produto("Anador", 145, 3.00, 3);
 		farmacia.cadastraProduto(p);
 		Produto p2 = farmacia.getProduto(146); 
-//		assertNull(p2);
+
 	}
 	
 	@Test
@@ -311,12 +311,12 @@ public class FarmaciaTest {
 		assertEquals(2,lista.size());
 	}
 	
-	@Test
+	@Test(expected = ClienteInexistenteException.class)
 	public void pesquisarClienteNaoCadastradoTest(){
 		Cliente c1 = new Cliente("Vanessa","123.345.567-90");
 		farmacia.cadastrarCliente(c1);
 		Cliente e = farmacia.pesquisarCliente("132.145.067-10");
-		assertNull(e);
+		
 	}
 	
 	@Test
